@@ -7,3 +7,10 @@
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+html {
+  height: 100vh;
+}
+body {
+  min-height: 100vh;
+}

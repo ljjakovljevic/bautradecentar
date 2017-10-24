@@ -1,0 +1,1 @@
+<li><a href="/home">{{ trans('navbar.home') }}</a></li>
