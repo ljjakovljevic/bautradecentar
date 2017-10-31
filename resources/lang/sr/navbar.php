@@ -9,9 +9,9 @@ return [
     */
 
     // Leva strana
-    'home' => 'Home',
+    'home' => 'Početna',
 
     // Desna strana
-    'lang' => 'Language'
+    'lang' => 'Jezik'
 
 ];

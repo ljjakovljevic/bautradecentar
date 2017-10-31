@@ -20,6 +20,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 @include('layouts.sections.sub-section.right-navbar')
+                @include('layouts.sections.sub-section.lang-switcher')
             </ul>
         </div>
     </div>

@@ -2,11 +2,13 @@
 
 namespace BauTRADE\Providers;
 
+use Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
     /**
      * This namespace is applied to your controller routes.
      *
@@ -15,6 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'BauTRADE\Http\Controllers';
+
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -27,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
     }
+
 
     /**
      * Define the routes for the application.
@@ -42,6 +46,7 @@ class RouteServiceProvider extends ServiceProvider
         //
     }
 
+
     /**
      * Define the "web" routes for the application.
      *
@@ -51,10 +56,19 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+        $locale = Request::segment(1);
+
+        Route::group([
+            'middleware' => 'web',
+            'namespace'  => $this->namespace,
+            'prefix'     => $locale
+        ], function ($router) {
+            require base_path('routes/web.php');
+        });
+
+        // Route::middleware('web')->namespace($this->namespace)->group(base_path('routes/web.php'));
     }
+
 
     /**
      * Define the "api" routes for the application.
@@ -65,9 +79,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+        Route::prefix('api')->middleware('api')->namespace($this->namespace)->group(base_path('routes/api.php'));
     }
 }
